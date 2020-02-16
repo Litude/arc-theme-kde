@@ -1,0 +1,16 @@
+{
+    "KPlugin": {
+        "Description": "Window decoration using the Arc visual style for the Plasma Desktop",
+        "EnabledByDefault": true,
+        "Id": "arc-decoration",
+        "Name": "Arc",
+        "ServiceTypes": [
+            "org.kde.kdecoration2"
+        ]
+    },
+    "org.kde.kdecoration2": {
+        "blur": false,
+        "kcmodule": true,
+        "recommendedBorderSize": "Tiny"
+    }
+}

@@ -1,0 +1,6 @@
+File=arcsettingsdata.kcfg
+ClassName=InternalSettings
+NameSpace=Arc
+Singleton=false
+Mutators=true
+GlobalEnums=true

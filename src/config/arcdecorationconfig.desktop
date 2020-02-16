@@ -1,0 +1,14 @@
+[Desktop Entry]
+Exec=kcmshell5 arcdecorationconfig
+Icon=preferences-system-windows
+Type=Service
+X-KDE-ServiceTypes=KCModule
+
+X-KDE-Library=org.kde.kdecoration2/arcdecoration
+X-KDE-PluginKeyword=kcmodule
+X-KDE-ParentApp=kcontrol
+X-KDE-Weight=60
+
+Name=Arc Window Decoration
+Comment=Modify the appearance of window decorations
+X-KDE-Keywords=arc,decoration
