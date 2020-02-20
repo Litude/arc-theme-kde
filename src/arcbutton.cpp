@@ -79,7 +79,7 @@ namespace Arc
         setIconSize(QSize( height, height ));
 
         // connections
-        connect(decoration->client().data(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
+        connect(decoration->client().toStrongRef().data(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
         connect(decoration->settings().data(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
         connect( this, &KDecoration2::DecorationButton::hoveredChanged, this, &Button::updateAnimationState );
 
@@ -103,40 +103,44 @@ namespace Arc
         if (auto d = qobject_cast<Decoration*>(decoration))
         {
             Button *b = new Button(type, d, parent);
-            switch( type )
-            {
 
-                case DecorationButtonType::Close:
-                b->setVisible( d->client().data()->isCloseable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::closeableChanged, b, &Arc::Button::setVisible );
-                break;
+            auto strongPtr = d->client().toStrongRef();
+            if (!strongPtr.isNull()) {
+                switch( type )
+                {
 
-                case DecorationButtonType::Maximize:
-                b->setVisible( d->client().data()->isMaximizeable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &Arc::Button::setVisible );
-                break;
+                    case DecorationButtonType::Close:
+                    b->setVisible( strongPtr.data()->isCloseable() );
+                    QObject::connect(strongPtr.data(), &KDecoration2::DecoratedClient::closeableChanged, b, &Arc::Button::setVisible );
+                    break;
 
-                case DecorationButtonType::Minimize:
-                b->setVisible( d->client().data()->isMinimizeable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &Arc::Button::setVisible );
-                break;
+                    case DecorationButtonType::Maximize:
+                    b->setVisible( strongPtr.data()->isMaximizeable() );
+                    QObject::connect(strongPtr.data(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &Arc::Button::setVisible );
+                    break;
 
-                case DecorationButtonType::ContextHelp:
-                b->setVisible( d->client().data()->providesContextHelp() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::providesContextHelpChanged, b, &Arc::Button::setVisible );
-                break;
+                    case DecorationButtonType::Minimize:
+                    b->setVisible( strongPtr.data()->isMinimizeable() );
+                    QObject::connect(strongPtr.data(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &Arc::Button::setVisible );
+                    break;
 
-                case DecorationButtonType::Shade:
-                b->setVisible( d->client().data()->isShadeable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::shadeableChanged, b, &Arc::Button::setVisible );
-                break;
+                    case DecorationButtonType::ContextHelp:
+                    b->setVisible( strongPtr.data()->providesContextHelp() );
+                    QObject::connect(strongPtr.data(), &KDecoration2::DecoratedClient::providesContextHelpChanged, b, &Arc::Button::setVisible );
+                    break;
 
-                case DecorationButtonType::Menu:
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::iconChanged, b, [b]() { b->update(); });
-                break;
+                    case DecorationButtonType::Shade:
+                    b->setVisible( strongPtr.data()->isShadeable() );
+                    QObject::connect(strongPtr.data(), &KDecoration2::DecoratedClient::shadeableChanged, b, &Arc::Button::setVisible );
+                    break;
 
-                default: break;
+                    case DecorationButtonType::Menu:
+                    QObject::connect(strongPtr.data(), &KDecoration2::DecoratedClient::iconChanged, b, [b]() { b->update(); });
+                    break;
 
+                    default: break;
+
+                }
             }
 
             return b;
@@ -166,7 +170,7 @@ namespace Arc
         {
 
             const QRectF iconRect( geometry().topLeft(), m_iconSize );
-            decoration()->client().data()->icon().paint(painter, iconRect.toRect());
+            decoration()->client().toStrongRef().data()->icon().paint(painter, iconRect.toRect());
 
 
         } else {
@@ -224,8 +228,6 @@ namespace Arc
             pen.setJoinStyle( Qt::MiterJoin );
             pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
-            // painter->setPen( pen );
-            // painter->setBrush( Qt::NoBrush );
             painter->setBrush( foregroundColor );
             painter->setPen( Qt::NoPen );
 
@@ -326,14 +328,20 @@ namespace Arc
 
                     } else {
 
-                        painter->drawPolygon( QVector<QPointF>{
-                            QPointF( 6, 5 ),
-                            QPointF( 9, 8.5 ),
-                            QPointF( 12, 5 )} );
-                        painter->drawPolygon( QVector<QPointF>{
-                            QPointF( 6, 10 ),
-                            QPointF( 9, 13.5 ),
-                            QPointF( 12, 10 )} );
+                        // drawing each dot separately seems to be the best way of ensuring
+                        // that scaling works properly
+                        painter->drawRect( QRectF( 8, 5, 1, 1) );
+                        painter->drawRect( QRectF( 10, 5, 1, 1) );
+                        painter->drawRect( QRectF( 12, 5, 1, 1) );
+                        painter->drawRect( QRectF( 12, 7, 1, 1) );
+                        painter->drawRect( QRectF( 12, 9, 1, 1) );
+                        painter->drawRect( QRectF( 10, 9, 1, 1) );
+                        painter->drawRect( QRectF( 8, 9, 1, 1) );
+                        painter->drawRect( QRectF( 8, 7, 1, 1) );
+
+                        painter->drawRect( QRectF( 5, 8, 1, 4.5) );
+                        painter->drawRect( QRectF( 5, 12, 5, 1) );
+
                     }
                     break;
 
@@ -349,15 +357,16 @@ namespace Arc
                             QPointF( 12, 11 )} );
 
                     } else {
+                        painter->drawRect( QRectF( 8, 5, 5, 5 ) );
 
-                        painter->drawPolygon( QVector<QPointF>{
-                            QPointF( 6, 8 ),
-                            QPointF( 9, 4.5 ),
-                            QPointF( 12, 8 )} );
-                        painter->drawPolygon( QVector<QPointF>{
-                            QPointF( 6, 13 ),
-                            QPointF( 9, 9.5 ),
-                            QPointF( 12, 13 )} );
+                        // drawing each dot separately seems to be the best way of ensuring
+                        // scaling works properly
+                        painter->drawRect( QRectF( 5, 8, 1, 1) );
+                        painter->drawRect( QRectF( 5, 10, 1, 1) );
+                        painter->drawRect( QRectF( 5, 12, 1, 1) );
+                        painter->drawRect( QRectF( 7, 12, 1, 1) );
+                        painter->drawRect( QRectF( 9, 12, 1, 1) );
+
                     }
                     break;
                 }
@@ -377,20 +386,18 @@ namespace Arc
                 {
                     painter->setBrush( Qt::NoBrush );
                     QPen pen { foregroundColor };
-                    pen.setCapStyle( Qt::RoundCap );
+                    pen.setCapStyle( Qt::FlatCap );
                     pen.setJoinStyle( Qt::MiterJoin );
-                    pen.setWidthF( PenWidth::Symbol*qMax((qreal)2.0, 40/width ) );
+                    pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.5, 30/width ) );
                     painter->setPen( pen );
 
                     QPainterPath path;
-                    path.moveTo( 6, 7 );
-                    path.arcTo( QRectF( 6, 4.5, 6, 3 ), 180, -180 );
-                    path.cubicTo( QPointF(11.5, 9.5), QPointF( 8, 7.5 ), QPointF( 9, 10.5 ) );
+                    path.moveTo( 6.5, 7.5 );
+                    path.arcTo( QRectF( 6.5, 5, 5, 3 ), 180, -180 );
+                    path.cubicTo( QPointF(11.5, 9), QPointF( 8, 8 ), QPointF( 9, 10.5 ) );
                     painter->drawPath( path );
 
-                    painter->setBrush( foregroundColor );
-                    painter->setPen( Qt::NoPen );
-                    painter->drawRect( QRectF( 8, 12, 2, 2 ) );
+                    painter->drawLine( QPointF( 9, 12 ), QPointF( 9, 14 ) );
 
                     break;
                 }
@@ -407,12 +414,14 @@ namespace Arc
     QColor Button::foregroundColor() const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
+        auto clientPtr = d ? d->client().toStrongRef() : QSharedPointer<KDecoration2::DecoratedClient>();
 
-        if( !d ) {
+        if ( clientPtr.isNull() ) {
 
             return QColor();
 
-        } else if( (isPressed() || (isChecked() && type() != DecorationButtonType::Maximize)) && type() != DecorationButtonType::Close ) {
+        }
+        else if( (isPressed() || (isChecked() && type() != DecorationButtonType::Maximize)) && type() != DecorationButtonType::Close ) {
 
             return m_iconActiveBg;
 
@@ -422,7 +431,7 @@ namespace Arc
 
         } else if( m_animation->state() == QAbstractAnimation::Running ) {
 
-            const QColor baseColor = d->client().data()->isActive() ? m_iconBg : m_iconUnfocusedBg;
+            const QColor baseColor = clientPtr.data()->isActive() ? m_iconBg : m_iconUnfocusedBg;
             return KColorUtils::mix( baseColor, m_iconHoverBg, m_opacity );
 
         } else if( isHovered() ) {
@@ -431,7 +440,7 @@ namespace Arc
 
         } else {
 
-            return (d->client().data()->isActive() ? m_iconBg : m_iconUnfocusedBg);
+            return (clientPtr.data()->isActive() ? m_iconBg : m_iconUnfocusedBg);
 
         }
 
@@ -441,13 +450,14 @@ namespace Arc
     QColor Button::backgroundColor() const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
-        if( !d ) {
+        auto clientPtr = d ? d->client().toStrongRef() : QSharedPointer<KDecoration2::DecoratedClient>();
+        if( clientPtr.isNull() ) {
 
             return QColor();
 
         }
 
-        auto c = d->client().data();
+        auto c = clientPtr.data();
         if( isPressed() ) {
             if ( type() == DecorationButtonType::Close ) return m_buttonCloseActiveBg;
             else return m_buttonActiveBg;

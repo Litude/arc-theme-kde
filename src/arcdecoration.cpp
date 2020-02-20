@@ -214,7 +214,7 @@ namespace Arc
     QColor Decoration::fontColor() const
     {
 
-        auto c = client().data();
+        auto clientPtr = client().toStrongRef();
         auto& activeColor = m_internalSettings->arcTheme() == InternalSettings::ThemeDark ? DARK_TITLE_FONT_COLOR : LIGHT_TITLE_FONT_COLOR;
         auto& inactiveColor = m_internalSettings->arcTheme() == InternalSettings::ThemeDark ? DARK_TITLE_FONT_COLOR_INACTIVE : LIGHT_TITLE_FONT_COLOR_INACTIVE;
 
@@ -222,7 +222,7 @@ namespace Arc
         {
             return KColorUtils::mix(inactiveColor, activeColor, m_opacity );
         } else {
-            return ( c->isActive() ? activeColor : inactiveColor);
+            return ( (!clientPtr.isNull() && clientPtr.data()->isActive()) ? activeColor : inactiveColor);
         }
 
     }
@@ -230,7 +230,7 @@ namespace Arc
     //________________________________________________________________
     void Decoration::init()
     {
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
 
         // active state change animation
         // It is important start and end value are of the same type, hence 0.0 and not just 0
@@ -290,7 +290,7 @@ namespace Arc
     void Decoration::updateTitleBar()
     {
         auto s = settings();
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         const bool maximized = isMaximized();
         const int width =  maximized ? c->width() : c->width() - 2*s->largeSpacing()*Metrics::TitleBar_SideMargin;
         const int height = maximized ? borderTop() : borderTop() - s->smallSpacing()*Metrics::TitleBar_TopMargin;
@@ -305,8 +305,8 @@ namespace Arc
         if( m_internalSettings->animationsEnabled() )
         {
 
-            auto c = client().data();
-            m_animation->setDirection( c->isActive() ? QAbstractAnimation::Forward : QAbstractAnimation::Backward );
+            const auto clientPtr = client().toStrongRef();
+            m_animation->setDirection( (!clientPtr.isNull() && clientPtr.data()->isActive()) ? QAbstractAnimation::Forward : QAbstractAnimation::Backward );
             if( m_animation->state() != QAbstractAnimation::Running ) m_animation->start();
 
         } else {
@@ -374,41 +374,45 @@ namespace Arc
     //________________________________________________________________
     void Decoration::recalculateBorders()
     {
-        auto c = client().data();
-        auto s = settings();
+        auto c = client().toStrongRef();
+        if (!c.isNull()) {
+            auto s = settings();
 
-        // left, right and bottom borders
-        const int left   = isLeftEdge() ? 0 : borderSize();
-        const int right  = isRightEdge() ? 0 : borderSize();
-        const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize();
+            // left, right and bottom borders
+            const int left   = isLeftEdge() ? 0 : borderSize();
+            const int right  = isRightEdge() ? 0 : borderSize();
+            const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize();
 
-        int top = 0;
-        if( hideTitleBar() ) top = bottom;
-        else {
+            int top = 0;
+            if( hideTitleBar() ) top = bottom;
+            else {
 
-            QFontMetrics fm(s->font());
-            top += qMax(fm.height(), buttonHeight() );
+                QFontMetrics fm(s->font());
+                top += qMax(fm.height(), buttonHeight() );
 
-            // padding below
-            // extra pixel is used for the active window outline
-            const int baseSize = s->smallSpacing();
-            top += baseSize*Metrics::TitleBar_BottomMargin + 1;
+                // padding below
+                // extra pixel is used for the active window outline
+                const int baseSize = s->smallSpacing();
+                top += baseSize*Metrics::TitleBar_BottomMargin + 1;
 
-            // padding above
-            top += baseSize*TitleBar_TopMargin;
+                // padding above
+                top += baseSize*TitleBar_TopMargin;
+
+            }
+
+            setBorders(QMargins(left, top, right, bottom));
+
+            // extended resize borders
+            const int extSize = s->largeSpacing();
+            int extTop = isTopEdge() ? 0 : extSize;
+            int extLeft = isLeftEdge() ? 0 : extSize;
+            int extRight = isRightEdge() ? 0 : extSize;
+            int extBottom = isBottomEdge() ? 0 : extSize;
+
+            setResizeOnlyBorders(QMargins(extLeft, extTop, extRight, extBottom));
 
         }
 
-        setBorders(QMargins(left, top, right, bottom));
-
-        // extended resize borders
-        const int extSize = s->largeSpacing();
-        int extTop = isTopEdge() ? 0 : extSize;
-        int extLeft = isLeftEdge() ? 0 : extSize;
-        int extRight = isRightEdge() ? 0 : extSize;
-        int extBottom = isBottomEdge() ? 0 : extSize;
-
-        setResizeOnlyBorders(QMargins(extLeft, extTop, extRight, extBottom));
 
     }
 
@@ -495,7 +499,7 @@ namespace Arc
     void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     {
         // TODO: optimize based on repaintRegion
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         auto s = settings();
 
         // paint background
@@ -558,11 +562,13 @@ namespace Arc
     //________________________________________________________________
     void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     {
-        const auto c = client().data();
+        const auto clientPtr = client().toStrongRef();
         const bool noBorders = hasNoSideBorders() || hasNoBorders();
         const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
-        if ( !titleRect.intersects(repaintRegion) ) return;
+        if ( !titleRect.intersects(repaintRegion) || clientPtr.isNull() ) return;
+
+        const auto c = clientPtr.data();
 
         painter->save();
 
@@ -665,7 +671,7 @@ namespace Arc
         if( hideTitleBar() ) return qMakePair( QRect(), Qt::AlignCenter );
         else {
 
-            auto c = client().data();
+            auto c = client().toStrongRef().data();
             const int leftOffset = m_leftButtons->buttons().isEmpty() ?
                 Metrics::TitleBar_SideMargin*settings()->smallSpacing():
                 m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin*settings()->smallSpacing();

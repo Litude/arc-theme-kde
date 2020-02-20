@@ -158,28 +158,52 @@ namespace Arc
     }
 
     bool Decoration::isMaximized() const
-    { return client().data()->isMaximized() && !m_internalSettings->drawBorderOnMaximizedWindows(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && clientPtr->isMaximized() && !m_internalSettings->drawBorderOnMaximizedWindows();
+    }
 
     bool Decoration::isMaximizedHorizontally() const
-    { return client().data()->isMaximizedHorizontally() && !m_internalSettings->drawBorderOnMaximizedWindows(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && clientPtr->isMaximizedHorizontally() && !m_internalSettings->drawBorderOnMaximizedWindows();
+    }
 
     bool Decoration::isMaximizedVertically() const
-    { return client().data()->isMaximizedVertically() && !m_internalSettings->drawBorderOnMaximizedWindows(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && clientPtr->isMaximizedVertically() && !m_internalSettings->drawBorderOnMaximizedWindows();
+    }
 
     bool Decoration::isLeftEdge() const
-    { return (client().data()->isMaximizedHorizontally() || client().data()->adjacentScreenEdges().testFlag( Qt::LeftEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && (clientPtr->isMaximizedHorizontally() || clientPtr->adjacentScreenEdges().testFlag( Qt::LeftEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows();
+    }
 
     bool Decoration::isRightEdge() const
-    { return (client().data()->isMaximizedHorizontally() || client().data()->adjacentScreenEdges().testFlag( Qt::RightEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && (clientPtr->isMaximizedHorizontally() || clientPtr->adjacentScreenEdges().testFlag( Qt::RightEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows();
+    }
 
     bool Decoration::isTopEdge() const
-    { return (client().data()->isMaximizedVertically() || client().data()->adjacentScreenEdges().testFlag( Qt::TopEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && (clientPtr->isMaximizedVertically() || clientPtr->adjacentScreenEdges().testFlag( Qt::TopEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows();
+    }
 
     bool Decoration::isBottomEdge() const
-    { return (client().data()->isMaximizedVertically() || client().data()->adjacentScreenEdges().testFlag( Qt::BottomEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && (clientPtr->isMaximizedVertically() || clientPtr->adjacentScreenEdges().testFlag( Qt::BottomEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows();
+    }
 
     bool Decoration::hideTitleBar() const
-    { return m_internalSettings->hideTitleBar() && !client().data()->isShaded(); }
+    {
+        auto clientPtr = client().toStrongRef();
+        return !clientPtr.isNull() && m_internalSettings->hideTitleBar() && !clientPtr->isShaded();
+    }
 
 }
 
