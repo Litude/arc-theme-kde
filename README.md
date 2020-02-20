@@ -1,8 +1,6 @@
 # Arc Window Decoration
 Window decoration for KDE Plasma based on the Breeze window decoration.
 
-![Screenshot](doc/Screenshot.png)
-
 ## Features
 * Faithful recreation of the [GTK Arc theme](https://github.com/horst3180/arc-theme) window decoration up to button spacing
 * Supports Arc and Arc Dark themes
