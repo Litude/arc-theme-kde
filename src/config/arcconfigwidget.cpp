@@ -38,7 +38,7 @@ namespace Arc
     //_________________________________________________________
     ConfigWidget::ConfigWidget( QWidget* parent, const QVariantList &args ):
         KCModule(parent, args),
-        m_configuration( KSharedConfig::openConfig( QStringLiteral( "arcrc" ) ) ),
+        m_configuration( KSharedConfig::openConfig( QStringLiteral( "arcdecorationrc" ) ) ),
         m_changed( false )
     {
 

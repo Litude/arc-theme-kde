@@ -33,7 +33,7 @@ namespace Arc
 
     //__________________________________________________________________
     SettingsProvider::SettingsProvider():
-        m_config( KSharedConfig::openConfig( QStringLiteral("arcrc") ) )
+        m_config( KSharedConfig::openConfig( QStringLiteral("arcdecorationrc") ) )
     { reconfigure(); }
 
     //__________________________________________________________________
