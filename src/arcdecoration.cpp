@@ -596,6 +596,7 @@ namespace Arc
 
             painter->setBrush( titleBarColor() );
             painter->drawRoundedRect(titleRectAdjusted, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            smoothenTitleBarCorners(painter, titleRectAdjusted, true);
             paintTitleBarShading(painter, titleRectAdjusted, true);
 
         } else {
@@ -604,13 +605,14 @@ namespace Arc
             if ( !noBorders ) {
                 painter->setClipRect(titleRect, Qt::IntersectClip);
                 painter->setBrush( outlineColor() );
-                painter->drawRoundedRect(titleRect.adjusted(0, 0, 0, Metrics::Frame_FrameRadius), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
-                titleRectAdjusted = titleRect.adjusted(1, 1, -1, Metrics::Frame_FrameRadius-1);
+                painter->drawRoundedRect(titleRect.adjusted(0, 0, 0, Metrics::Frame_FrameRadius), Metrics::Frame_FrameRadius+1, Metrics::Frame_FrameRadius+1);
+                titleRectAdjusted = titleRect.adjusted(1, 1, -1, Metrics::Frame_FrameRadius);
             }
 
             painter->setClipRect(titleRect, Qt::IntersectClip);
             painter->setBrush( titleBarColor() );
             painter->drawRoundedRect(titleRectAdjusted, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            smoothenTitleBarCorners(painter, titleRectAdjusted, false);
             paintTitleBarShading(painter, titleRectAdjusted, true);
 
         }
@@ -637,12 +639,33 @@ namespace Arc
         painter->setRenderHint( QPainter::Antialiasing, false );
 
         if (rounded) {
-            painter->setClipRect(titleRect.adjusted(0, 0, 0, 2 - titleRect.height()), Qt::IntersectClip);
-            painter->drawRoundedRect(titleRect, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            const QRect adjustedRect = titleRect.adjusted(-1, 0, 0, 0);
+            painter->setClipRect(adjustedRect.adjusted(0, 0, 0, 2 - adjustedRect.height()), Qt::IntersectClip);
+            painter->drawRoundedRect(adjustedRect, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
         } else {
             painter->drawLine( titleRect.topLeft(), titleRect.topRight() );
         }
 
+    }
+
+
+    //________________________________________________________________
+    void Decoration::smoothenTitleBarCorners(QPainter *painter, const QRect &titleRect, bool bottom) {
+
+        QPen pen { titleBarColor(), 1.5 };
+        painter->setPen( pen );
+        painter->setBrush( Qt::NoBrush );
+        painter->setRenderHint( QPainter::Antialiasing, false );
+        painter->setClipRect(titleRect, Qt::ReplaceClip);
+
+        QRect arcSize = titleRect.adjusted(0, 0, 7 - titleRect.width(), 7 - titleRect.height());
+
+        painter->drawArc(arcSize, 90*16, 90*16);
+        painter->drawArc(arcSize.translated(titleRect.width() - arcSize.width(), 0), 0*16, 90*16);
+        if (bottom) {
+            painter->drawArc(arcSize.translated(0, titleRect.height() - arcSize.height()), 180*16, 90*16);
+            painter->drawArc(arcSize.translated(titleRect.width() - arcSize.width(), titleRect.height() - arcSize.height()), 270*16, 90*16);
+        }
     }
 
     //________________________________________________________________

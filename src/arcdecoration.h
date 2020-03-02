@@ -117,6 +117,7 @@ namespace Arc
         void createButtons();
         void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
         void paintTitleBarShading(QPainter *painter, const QRect &titleRect, const bool rounded);
+        void smoothenTitleBarCorners(QPainter *painter, const QRect &titleRect, bool bottom);
         void createShadow();
 
         //*@name border size

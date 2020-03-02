@@ -47,6 +47,8 @@ namespace Arc
         //* button creation
         static Button *create(KDecoration2::DecorationButtonType type, KDecoration2::Decoration *decoration, QObject *parent);
 
+        bool isCheckedCustom() const;
+
         //* render
         virtual void paint(QPainter *painter, const QRect &repaintRegion) override;
 

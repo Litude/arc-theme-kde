@@ -150,6 +150,14 @@ namespace Arc
 
     }
 
+    bool Button::isCheckedCustom() const {
+        if (type() == DecorationButtonType::Maximize) {
+            return false;
+        } else {
+            return isChecked();
+        }
+    }
+
     //__________________________________________________________________
     void Button::paint(QPainter *painter, const QRect &repaintRegion)
     {
@@ -205,7 +213,8 @@ namespace Arc
         if( backgroundColor.isValid() )
         {
             painter->setBrush( backgroundColor );
-            if ( isHovered() && !isPressed() && !isChecked() && type() != DecorationButtonType::Close) {
+            if ( type() != DecorationButtonType::Close && !isPressed() && !isCheckedCustom() &&
+            (isHovered() || (m_animation->state() == QAbstractAnimation::Running ))) {
                 QPen pen( m_buttonHoverBorder );
                 pen.setWidthF(1.25);
                 painter->setPen( pen );
@@ -276,20 +285,21 @@ namespace Arc
 
                     } else {
 
-                        painter->setPen( Qt::NoPen );
-                        painter->setBrush( foregroundColor );
-                        painter->drawPolygon( QVector<QPointF> {
-                            QPointF( 7.5, 7.5 ),
-                            QPointF( 11, 4 ),
-                            QPointF( 14, 7 ),
-                            QPointF( 10.5, 10.5 )} );
+                        painter->drawPolygon( QVector<QPointF>{
+                            QPointF( 10, 6.5 ),
+                            QPointF( 10, 4 ),
+                            QPointF( 14, 8 ),
+                            QPointF( 11.5, 8 ),
+                            QPointF( 10, 9.5 ),
+                            QPointF( 10, 12 ),
+                            QPointF( 8, 11 ),
+                            QPointF( 7, 10 ),
+                            QPointF( 6, 8 ),
+                            QPointF( 8.5, 8 )
+                        });
 
-                        QPen thickPen(foregroundColor, 1.5f);
-
-                        painter->setPen(thickPen);
-                        painter->drawLine( QPointF( 6.5, 6.5 ), QPointF( 11.5, 11.5 ) );
                         painter->setPen( pen );
-                        painter->drawLine( QPointF( 12, 6 ), QPointF( 5.5, 12.5 ) );
+                        painter->drawLine( QPointF( 11, 7 ), QPointF( 5.5, 12.5 ) );
                     }
                     break;
                 }
@@ -421,7 +431,7 @@ namespace Arc
             return QColor();
 
         }
-        else if( (isPressed() || (isChecked() && type() != DecorationButtonType::Maximize)) && type() != DecorationButtonType::Close ) {
+        else if( (isPressed() || (isCheckedCustom())) && type() != DecorationButtonType::Close ) {
 
             return m_iconActiveBg;
 
@@ -462,7 +472,7 @@ namespace Arc
             if ( type() == DecorationButtonType::Close ) return m_buttonCloseActiveBg;
             else return m_buttonActiveBg;
 
-        } else if( type() !=  DecorationButtonType::Maximize && isChecked() ) {
+        } else if( isCheckedCustom() ) {
             return m_buttonSelectedBg;
 
         } else if( m_animation->state() == QAbstractAnimation::Running ) {
