@@ -579,6 +579,7 @@ namespace Arc
         if( isMaximized() )
         {
             painter->drawRect(titleRect);
+            paintTitleBarShading(painter, titleRect, false);
 
         } else if( !s->isAlphaChannelSupported() ) {
             painter->setClipRect(titleRect);

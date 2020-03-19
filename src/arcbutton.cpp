@@ -255,17 +255,34 @@ namespace Arc
 
                 case DecorationButtonType::Maximize:
                 {
-                    painter->drawPolygon( QVector<QPointF>{
-                        QPointF( 6, 11 ),
-                        QPointF( 6, 8 ),
-                        QPointF( 10, 12 ),
-                        QPointF( 7, 12 )} );
+                    if ( isChecked() ) {
 
-                    painter->drawPolygon( QVector<QPointF>{
-                        QPointF( 12, 7 ),
-                        QPointF( 12, 10 ),
-                        QPointF( 8, 6 ),
-                        QPointF( 11, 6 )} );
+                        painter->drawPolygon( QVector<QPointF>{
+                            QPointF( 9, 9.8 ),
+                            QPointF( 9, 13.2 ),
+                            QPointF( 4.8, 9 ),
+                            QPointF( 8.2, 9 )} );
+
+                        painter->drawPolygon( QVector<QPointF>{
+                            QPointF( 9, 8.2 ),
+                            QPointF( 9, 4.8 ),
+                            QPointF( 13.2, 9 ),
+                            QPointF( 9.8, 9 )} );
+                    } else {
+
+                        painter->drawPolygon( QVector<QPointF>{
+                            QPointF( 6, 11.4 ),
+                            QPointF( 6, 7.6 ),
+                            QPointF( 10.4, 12 ),
+                            QPointF( 6.6, 12 )} );
+
+                        painter->drawPolygon( QVector<QPointF>{
+                            QPointF( 12, 6.6 ),
+                            QPointF( 12, 10.4 ),
+                            QPointF( 7.6, 6 ),
+                            QPointF( 11.4, 6 )} );
+                    }
+
                     break;
                 }
 
