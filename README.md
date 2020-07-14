@@ -10,7 +10,7 @@ Window decoration for KDE Plasma based on the Breeze window decoration.
 * Window resizing that works by dragging window borders regardless of border size
 
 ## Install/Build
-This window decoration must be built and installed from source. It has been tested and built against KDE Plasma 5.18.
+This window decoration must be built and installed from source. It has been tested and built against KDE Plasma 5.19.
 
 At least the following packages are required on KDE Neon:
 

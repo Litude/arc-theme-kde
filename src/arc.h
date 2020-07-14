@@ -38,7 +38,7 @@ namespace Arc
     {
 
         //* corner radius (pixels)
-        Frame_FrameRadius = 4,
+        Frame_FrameRadius = 3,
 
         //* titlebar metrics, in units of small spacing
         TitleBar_TopMargin = 2,

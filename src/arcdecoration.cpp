@@ -149,13 +149,13 @@ namespace Arc
     static const QColor LIGHT_TITLE_FONT_COLOR = QColor { "#f1525d76" };
     static const QColor LIGHT_TITLE_FONT_COLOR_INACTIVE = QColor { "#7f525d76" };
     static const QColor LIGHT_WINDOW_MAIN_BG = QColor { "#e7e8eb" };
-    static const QColor LIGHT_WINDOW_MAIN_BORDER = QColor { "#4a000000" };
+    static const QColor LIGHT_WINDOW_MAIN_BORDER = QColor { "#1a000000" };
     static const QColor LIGHT_WINDOW_HIGHLIGHT = QColor { "#eff0f2" };
 
     static const QColor DARK_TITLE_FONT_COLOR = QColor { "#f1cfdae7" };
     static const QColor DARK_TITLE_FONT_COLOR_INACTIVE = QColor { "#7fcfdae7" };
     static const QColor DARK_WINDOW_MAIN_BG = QColor { "#2f343f" };
-    static const QColor DARK_WINDOW_MAIN_BORDER = QColor { "#B9000000" };
+    static const QColor DARK_WINDOW_MAIN_BORDER = QColor { "#1d2027" };
     static const QColor DARK_WINDOW_HIGHLIGHT = QColor { "#363b48" };
 
     //________________________________________________________________
@@ -498,7 +498,6 @@ namespace Arc
     //________________________________________________________________
     void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     {
-        // TODO: optimize based on repaintRegion
         auto c = client().toStrongRef().data();
         auto s = settings();
 
@@ -640,9 +639,8 @@ namespace Arc
         painter->setRenderHint( QPainter::Antialiasing, false );
 
         if (rounded) {
-            const QRect adjustedRect = titleRect.adjusted(-1, 0, 0, 0);
-            painter->setClipRect(adjustedRect.adjusted(0, 0, 0, 2 - adjustedRect.height()), Qt::IntersectClip);
-            painter->drawRoundedRect(adjustedRect, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            painter->setClipRect(titleRect.adjusted(0, 0, 0, 2 - titleRect.height()), Qt::IntersectClip);
+            painter->drawRoundedRect(titleRect, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
         } else {
             painter->drawLine( titleRect.topLeft(), titleRect.topRight() );
         }
