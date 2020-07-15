@@ -1,0 +1,9 @@
+[kdeglobals][KDE]
+widgetStyle=kvantum
+
+[kwinrc][org.kde.kdecoration2]
+library=arc-decoration
+theme=Arc
+
+[plasmarc][Theme]
+name=Arc-Dark
