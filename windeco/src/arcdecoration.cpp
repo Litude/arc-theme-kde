@@ -56,8 +56,8 @@ K_PLUGIN_FACTORY_WITH_JSON(
     ArcDecoFactory,
     "arc.json",
     registerPlugin<Arc::Decoration>();
-    registerPlugin<Arc::Button>(QStringLiteral("button"));
-    registerPlugin<Arc::ConfigWidget>(QStringLiteral("kcmodule"));
+    registerPlugin<Arc::Button>();
+    registerPlugin<Arc::ConfigWidget>();
 )
 
 namespace
@@ -772,7 +772,6 @@ namespace Arc
             Breeze::BoxShadowRenderer shadowRenderer;
             shadowRenderer.setBorderRadius(Metrics::Frame_FrameRadius + 0.5);
             shadowRenderer.setBoxSize(boxSize);
-            shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
 
             const qreal strength = static_cast<qreal>(g_shadowStrength) / 255.0;
             shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,

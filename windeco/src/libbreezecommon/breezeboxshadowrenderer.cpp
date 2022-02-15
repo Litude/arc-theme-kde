@@ -1,12 +1,9 @@
 /*
- * Copyright (C) 2018 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+ * SPDX-FileCopyrightText: 2018 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
  *
  * The box blur implementation is based on AlphaBoxBlur from Firefox.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * SPDX-License-Identifier: GPL-2.0-or-later
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -297,11 +294,6 @@ void BoxShadowRenderer::setBorderRadius(qreal radius)
     m_borderRadius = radius;
 }
 
-void BoxShadowRenderer::setDevicePixelRatio(qreal dpr)
-{
-    m_dpr = dpr;
-}
-
 void BoxShadowRenderer::addShadow(const QPoint &offset, int radius, const QColor &color)
 {
     Shadow shadow = {};
@@ -323,8 +315,7 @@ QImage BoxShadowRenderer::render() const
             calculateMinimumShadowTextureSize(m_boxSize, shadow.radius, shadow.offset));
     }
 
-    QImage canvas(canvasSize * m_dpr, QImage::Format_ARGB32_Premultiplied);
-    canvas.setDevicePixelRatio(m_dpr);
+    QImage canvas(canvasSize, QImage::Format_ARGB32_Premultiplied);
     canvas.fill(Qt::transparent);
 
     QRect boxRect(QPoint(0, 0), m_boxSize);

@@ -25,6 +25,7 @@
 #include <KIconLoader>
 
 #include <QPainter>
+#include <QPainterPath>
 #include <QVariantAnimation>
 
 namespace Arc

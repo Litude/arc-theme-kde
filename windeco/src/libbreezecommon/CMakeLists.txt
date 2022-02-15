@@ -1,4 +1,4 @@
-set(PROJECT_VERSION "5.18.80")
+set(PROJECT_VERSION "5.24.80")
 set(PROJECT_VERSION_MAJOR 5)
 
 ################# dependencies #################
