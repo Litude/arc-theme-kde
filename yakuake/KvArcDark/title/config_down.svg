@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 30 30"
+   version="1.1"
+   id="svg3794"
+   sodipodi:docname="config_down.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3798">
+    <linearGradient
+       id="selected_bg_color"
+       gradientTransform="matrix(2.2857143,0,0,2.2857143,-2821.288,111.50947)"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#5294e2;stop-opacity:1;"
+         offset="0"
+         id="stop5956" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="namedview3796"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="37.866667"
+     inkscape:cx="9.7579225"
+     inkscape:cy="15"
+     inkscape:window-width="1842"
+     inkscape:window-height="1371"
+     inkscape:window-x="3198"
+     inkscape:window-y="208"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3794" />
+  <g
+     id="g3808"
+     transform="matrix(0.64285714,0,0,0.64285714,-109.71428,-402.85714)">
+    <g
+       id="mdi-shade-pressed"
+       transform="matrix(0.875,0,0,0.875,-89.37303,42.429194)">
+      <circle
+         r="16"
+         cy="694.36664"
+         cx="323.85489"
+         style="fill:url(#selected_bg_color);fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path4068-7-3-0-3-6-8-3-4" />
+    </g>
+  </g>
+  <g
+     id="g3917">
+    <g
+       id="g3046"
+       transform="matrix(0.64285714,0,0,0.64285714,-134.14286,-347.57143)"
+       style="stroke-width:1.00022;stroke-dasharray:none">
+      <g
+         id="mdi-menu-normal"
+         transform="matrix(2,0,0,2,-568,-536)"
+         style="stroke-width:0.500111;stroke-dasharray:none">
+        <rect
+           y="543"
+           x="393"
+           height="14"
+           width="14"
+           id="rect2534-0"
+           style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke-width:0.500111;stroke-dasharray:none" />
+        <g
+           transform="translate(161.15907,6)"
+           style="fill:#ffffff;fill-opacity:1;stroke-width:0.500111;stroke-dasharray:none"
+           id="g3298">
+          <path
+             sodipodi:nodetypes="ccccc"
+             style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.500111;stroke-dasharray:none;marker:none;enable-background:accumulate"
+             id="rect9057-4-3-8-5-49"
+             d="m 234.84093,543 v 2 h 8 v -2 z"
+             inkscape:connector-curvature="0" />
+          <path
+             sodipodi:nodetypes="ccccc"
+             style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.500111;stroke-dasharray:none;marker:none;enable-background:accumulate"
+             id="rect9057-4-3-8-5-49-9"
+             d="m 234.84093,546 v 2 h 8 v -2 z"
+             inkscape:connector-curvature="0" />
+          <path
+             sodipodi:nodetypes="ccccc"
+             style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.500111;stroke-dasharray:none;marker:none;enable-background:accumulate"
+             id="rect9057-4-3-8-5-49-9-1"
+             d="m 234.84093,540 v 2 h 8 v -2 z"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

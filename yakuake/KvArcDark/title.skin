@@ -1,0 +1,16 @@
+[Description]
+Skin=KvArc
+Author=Litude
+Email=litude_@hotmail.com
+Icon=/icon.svg
+
+[Border]
+red=29
+green=32
+blue=39
+width=0
+
+[Background]
+back_image=/title/back.svg
+left_corner=/title/back.svg
+right_corner=/title/back.svg

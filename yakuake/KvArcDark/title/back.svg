@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1"
+   height="6"
+   viewBox="0 0 0.26458332 1.5874999"
+   version="1.1"
+   id="svg855"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   sodipodi:docname="back.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview857"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="115.85238"
+     inkscape:cx="1.9593901"
+     inkscape:cy="2.8052942"
+     inkscape:window-width="2458"
+     inkscape:window-height="1278"
+     inkscape:window-x="3486"
+     inkscape:window-y="488"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs852" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="fill:#2f343f;fill-opacity:1"
+     transform="matrix(-1,0,0,1,1.0583333,0)">
+    <rect
+       style="fill-opacity:1;stroke:none;stroke-width:0.187383;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2012"
+       width="0.26458332"
+       height="1.0583333"
+       x="0.79374993"
+       y="0" />
+    <path
+       style="fill-opacity:1;stroke:#1d2027;stroke-width:0.26278;stroke-dasharray:none;stroke-opacity:1"
+       d="M 0.79464522,0.92694609 1.057438,0.92513683"
+       id="path2918"
+       inkscape:label="path2918" />
+    <g
+       id="g2980"
+       transform="matrix(0.99480711,0,0,1.0051491,0.0054912,-0.26935161)"
+       style="stroke:#363b48;stroke-opacity:1">
+      <path
+         style="fill:#2f343f;fill-opacity:1;stroke:#363b48;stroke-width:0.262789;stroke-dasharray:none;stroke-opacity:1"
+         d="m 0.79327341,0.92694146 0.26416459,-0.0018"
+         id="path2918-3"
+         inkscape:label="path2918" />
+    </g>
+  </g>
+</svg>

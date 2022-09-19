@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 30 30"
+   version="1.1"
+   id="svg1361"
+   sodipodi:docname="quit_up.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1365" />
+  <sodipodi:namedview
+     id="namedview1363"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="7.8666667"
+     inkscape:cx="15"
+     inkscape:cy="15.063559"
+     inkscape:window-width="2560"
+     inkscape:window-height="1511"
+     inkscape:window-x="0"
+     inkscape:window-y="48"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1361" />
+  <g
+     id="g1373"
+     transform="matrix(0.64285714,0,0,0.64285714,-86.569428,-346.28371)">
+    <path
+       style="display:inline;opacity:1;fill:#cc575d;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 158,548 a 14,14 0 0 0 -14,14 14,14 0 0 0 14,14 14,14 0 0 0 14,-14 14,14 0 0 0 -14,-14 z m -6,7.84376 h 1.5 c 0.016,-1.8e-4 0.0312,-7e-4 0.0468,0 0.38242,0.016 0.7648,0.1928 1.03124,0.46874 l 3.42196,3.42188 3.46876,-3.42188 c 0.39841,-0.34574 0.67,-0.45824 1.03124,-0.46874 h 1.5 v 1.5 c 0,0.4297 -0.0516,0.82598 -0.375,1.125 l -3.42188,3.42188 3.37499,3.375 c 0.28229,0.28224 0.42187,0.68016 0.42189,1.07812 v 1.5 h -1.5 c -0.39796,-2e-5 -0.79588,-0.1396 -1.07812,-0.42188 L 158,564 l -3.42188,3.42188 c -0.28224,0.28228 -0.68018,0.42188 -1.07812,0.42188 H 152 v -1.5 c 0,-0.39794 0.1396,-0.79588 0.42188,-1.07812 l 3.42188,-3.375 -3.42188,-3.42188 c -0.31612,-0.29194 -0.45474,-0.70388 -0.42188,-1.125 z"
+       id="mdi-close-normal"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
